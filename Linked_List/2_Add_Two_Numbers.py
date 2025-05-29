@@ -29,33 +29,28 @@ def print_link_list(input):
         print(v, end='')
     print()
 
-# print_link_list(l1)
-# print_link_list(l2)
+# 1.
+def addTwoNumbers(l1: ListNode, l2: ListNode) -> ListNode:
+    s = sum_list = ListNode(None)
+    total = 0
 
-# s = sum_list = ListNode(None)
-# n1, n10 = 0, 0
-# while l1 or l2 or n10 != 0:
-#     temp = 0
-#     if l1 != None:
-#         temp += l1.val
-#         l1 = l1.next
-    
-#     if l2 != None:
-#         temp += l2.val
-#         l2 = l2.next
+    while l1 or l2:
+        if l1:
+            total += l1.val
+            l1 = l1.next
+        if l2:
+            total += l2.val
+            l2 = l2.next
+        sum_list.next = ListNode(total % 10)
+        sum_list = sum_list.next
+        total = total // 10
 
-#     temp += n10
-#     n1 = temp % 10
-#     n10 = temp // 10
-#     # print(temp, n1, n10)
-#     sum_list.next = ListNode(n1)
+    if total > 0:
+        sum_list.next = ListNode(total)
 
-#     sum_list = sum_list.next  
-#     # print("s")
-#     # print(sum_list.val)
+    return s.next
 
-# print_link_list(s.next)
-
+# 2.
 s = sum_list = ListNode(None)
 total = 0
 scale = 1

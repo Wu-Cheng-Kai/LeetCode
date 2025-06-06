@@ -9,34 +9,40 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-
         if not root:
             return root
-            
-        self.head = root
 
-        # if not (root.left or root.right):
-        #     # self.head.right = root
-        #     # self.head.left = None
-        #     print(root.val)
+        self.order = []
 
         if root.left:
-            root.left = self.search(root.left)
+            self.search(root.left)
         if root.right:
-            root.right = self.search(root.right)
-        
+            self.search(root.right)
+
+        for node in self.order:
+            root.right = node
+            root.left = None
+            root = node
     
-    def search(self, root: TreeNode) -> TreeNode:
-
-        print(root.val, self.head)
-        a = self.head
-        self.head = root
-
-        if root.left:
-            root.left = self.search(root.left)
-        if root.right:
-            root.right = self.search(root.right)
+    def search(self, root: TreeNode):
+        self.order.append(root)
         
-        a.right = root
+        if root.left:
+            self.search(root.left)
+        if root.right:
+            self.search(root.right)
 
-        return root
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+        self.pre = None
+
+        def forward(node: TreeNode):
+            if node:
+                forward(node.right)
+                forward(node.left)
+
+                node.right = self.pre
+                node.left = None
+                self.pre = node
+
+        forward(root)

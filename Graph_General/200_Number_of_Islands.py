@@ -1,16 +1,15 @@
 def numIslands(grid: list) -> int:
     islands = 0
-    count = [row.copy() for row in grid]
     link = {}
 
     def get_top(x: int, y: int) -> int:
         if x > 0:
-            return count[x-1][y]
+            return grid[x-1][y]
         return 0
     
     def get_left(x: int, y: int) -> int:
         if y > 0:
-            return count[x][y-1]
+            return grid[x][y-1]
         return 0
     
     def connect(x: int, y: int) -> None:
@@ -22,16 +21,16 @@ def numIslands(grid: list) -> int:
     for x in range(len(grid)):
         for y in range(len(grid[0])):
             if grid[x][y] == "0":
-                count[x][y] = 0
+                grid[x][y] = 0
             else:
                 top, left = get_top(x, y), get_left(x, y)
                 if top == 0 and left == 0:
                     islands += 1
-                    count[x][y] = islands
+                    grid[x][y] = islands
                 elif top == 0:
-                    count[x][y] = left
+                    grid[x][y] = left
                 else:
-                    count[x][y] = top
+                    grid[x][y] = top
                     if left != 0:
                         connect(top, left)
 
